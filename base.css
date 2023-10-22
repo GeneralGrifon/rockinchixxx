@@ -1,0 +1,223 @@
+body {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #000000;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+::selection {
+  background: #ff00ff; /* Цвет фона */
+  color: #fff; /* Цвет текста */
+ }
+.USER 
+{
+  position: absolute; width: 220px; height: 300px;
+  background-color: #0000007a; top: 20%; right: 30px; border-radius: 7px; 
+  outline: 1px solid rgba(255, 255, 255, 0.502);
+  backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.nik 
+{
+  position: relative; color: white; margin: 20px; font-size: 2vw;
+}
+.ava 
+{
+  position: relative; width: 170px; height: 170px; border-radius: 50%; outline: 1px solid white; box-shadow: 0 0 15px rgb(0, 217, 255);
+}
+.info 
+{
+  color: white; 
+  text-shadow: 0 0 5px rgb(0, 217, 255);
+}
+.Components
+{
+  position: absolute; width: 250px; height: 300px;
+   background-color: rgba(238, 130, 238, 0); 
+   /* outline: 1px solid white; */
+   border-radius: 5px;
+  top: 10px;left: 10px; display: block;
+  overflow: hidden;
+  /* display: flex; flex-wrap: wrap; */
+}
+.cmpt 
+{
+  position: relative; width: 80%; height: 44px; 
+  background-color: rgba(14, 14, 14, 0.463); 
+  clip-path: polygon(100% 0, 100% 14%, 80% 100%, 0 100%, 0 0);
+  /* background: linear-gradient(0.5turn, #00000088, #ab282800, #00000069); */
+  margin: 10px; 
+  font-family: 'Courier New', Courier, monospace;
+  /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+  color: white; 
+  text-shadow: 0 0 10px rgb(255, 0, 238);
+  font-size: 2vw; padding: 10px; z-index: 1; cursor: pointer;
+  /* backdrop-filter: blur(10px); */
+}
+.cmpt:hover
+{
+  background-color: #c170fed0; color: rgb(255, 255, 255);
+}
+.controls 
+{
+  position: absolute;
+  width: 300px; height: 300px; background: #575757; top: 0; left: 0;
+}
+.mainmenu 
+{
+  position: absolute; width: 200px; height: 200px; display: block;
+}
+.menu 
+{
+  position: relative; width: 50px; height: 50px; top: 400px; left: 0; 
+  cursor: pointer; background-color: rgba(255, 255, 0, 0.386); border-radius: 5px; outline: 1px solid white;
+  display: none;
+}
+
+.button 
+{
+  border-radius: 10px; outline: 1px solid white; background-color: #ff00f237; 
+  width: 50px; height: 50px;  margin: 5px; cursor: pointer;
+  backdrop-filter: blur(10px);
+  display: flex; justify-content: center; align-items: center;
+  display: none;
+}
+.button:hover 
+{
+  background-color: rgb(191, 0, 255);
+}
+.button:hover img 
+{
+  filter: invert(1);
+}
+.button img 
+{
+  position: relative; width: 80%;
+}
+.danceButton
+{
+  position: absolute;  right: 0; bottom: 0;
+}
+.stripButton
+{
+  position: absolute; right: 0; bottom: 55px;
+}
+.spaceButton
+{
+  position: absolute;  right: 0; bottom: 110px;
+}
+.forwardButton
+{
+  position: absolute;  left: 50px; bottom: 100px;
+}
+.forwardButton img 
+{
+  rotate: -90deg;
+}
+.backwardButton img 
+{
+  rotate: 90deg;
+}
+.leftButton img 
+{
+  rotate: 180deg;
+}
+.backwardButton
+{
+  position: absolute;  left: 50px; bottom: 0px;
+}
+.leftButton 
+{
+  position: absolute;  left: 0px; bottom: 50px;
+}
+.rightButton
+{
+  position: absolute;  left: 100px; bottom: 50px;
+}
+.block1 
+{
+  position: absolute; width: 50%; height: 6%; background-color: #2d0024b0; 
+  top: 1% ; right: 1%; padding: 10px; outline: 1px solid pink; overflow: hidden;
+  box-shadow: 0 0 5px rgb(248, 56, 255),
+  0 0 10px  rgb(248, 56, 255);
+  backdrop-filter: blur(10px); border-radius: 7px; transition: 0.333s;
+}
+.block1:hover 
+{
+  height: 63%;
+}
+.block1:hover h2
+{
+  opacity: 1;
+}
+/* h1 
+{
+  color: white;
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 300;
+  font-size: 5vw;
+} */
+/* h2
+{
+  position: relative;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: lighter;
+  font-size: 4vw; margin-top: 30px;
+  opacity: 0; transition: 0.333s;
+} */
+@font-face {
+  font-family: myFirstFont;
+  src: url(/game-main/resources/alter-bridge/Alter\ Bridge.ttf);
+}
+.rockinchixxx 
+{
+  display: flex; justify-content: center; align-items: center;
+  position: absolute; width: 50%; height: 77px; color: white; text-shadow: 0 0 10px rgb(200, 0, 255),
+  0 0 15px rgb(200, 0, 255);
+ border-top: 1px solid rgba(255, 255, 255, 0.479); margin: 10px;
+  font-size: 4.5vw; right: 0;
+  background-color: #00000086; backdrop-filter: blur(10px); 
+  /* font-family: 'Enchanted Land'; */
+  font-family: 'LED';
+  letter-spacing: 2px;
+  clip-path: polygon(0 0, 85% 0, 100% 70%, 100% 100%, 15% 100%, 0% 30%);
+  /* font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;  */
+  /* letter-spacing: 10px;  */
+}
+.order 
+{
+  position: absolute; width: auto; height: auto; 
+  /* background: linear-gradient(to bottom, #e0c789 30%, white 35%, #a38a4b); */
+  /* background: #e0c789; */
+  /* clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 70%, 95% 100%, 5% 100%, 0% 70%, 0% 30%); */
+  display: flex; justify-content: center; align-items: center; font-size: 2vw; color: white;
+  padding: 10px; top: 9%; right: 0; margin: 1%; 
+  margin-right: 11%;
+  font-family: 'Courier New', Courier, monospace;
+  animation: flick2 2s linear infinite;
+}
+/* p 
+{
+  font-family: 'Enchanted Land';
+  font-size: 7vw;
+} */
+
+@media (max-width: 1000px) {
+
+  input {
+  font-size: 50px;
+  }
+  }
+  @font-face
+  {
+    font-family: 'Enchanted Land';
+    src: url('./resources/enchanted_land/Enchanted\ Land.otf'); 
+  }
+  @font-face
+  {
+    font-family: 'LED';
+    src: url('./resources/led2/7fonts.ru_Vactic.ttf'); 
+  }

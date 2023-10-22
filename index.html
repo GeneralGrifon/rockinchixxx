@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Three.JS Tutorial: Character Controller</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="base.css">
+  <link rel="stylesheet" type="text/css" href="articles.css">
+  <link rel="stylesheet" href="models.css">
+  <link rel="stylesheet" href="market.css">
+  
+</head>
+
+<style>
+  input 
+  {
+    position: absolute; width: 250px; height: 50px; right: 0; margin: 10px; font-size: 1.5vw;
+  }
+  button
+  {
+    position: absolute; width: 250px; height: 50px; right: 0; top: 70px; cursor: pointer; margin: 10px;
+  }
+
+  @media (max-width: 1000px) {
+
+input {
+font-size: 20px; height: 25px; width: 44%;
+}
+}
+</style>
+<style>
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #000000; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #b649ff; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fff700; 
+  }
+  </style>
+<body>
+  <div class="rockinchixxx">
+    Rockin Chixxx
+  </div>
+
+  <!-- <div class="USER">
+    <img class="ava" src="./resources/ava.png" alt="">
+    <div class="nik">Alex Shel</div>
+    <div class="info">General Director</div>
+  </div> -->
+  <!-- <input placeholder="введи пароль мразь" id="passwordInput" type="text"> -->
+  <!-- <button>
+    intim
+  </button> -->
+  <div class="Components">
+    
+    <div class="cmpt Artcls" onclick="addClassToArticles()" >articles</div>
+    <div class="cmpt Mdls" id="modelspos" onclick="addClassToGirls()">models</div>
+    <div class="cmpt Mrct" onclick="addClassToMarket()" >market</div>
+    <!-- <div class="uneverse cmpt ">uverse</div> -->
+    
+  </div>
+  <div class="mainmenu">
+    <div class="menu" id="articlespos">art</div>
+    <div class="menu" id="marketpos" >mrkt</div>
+    <div class="menu" id="homepos" >hm</div>
+  </div>
+  <div class="Market">
+    <div class="product">
+      <img src="./resources/products/майка6.png" alt="">
+      <div class="prodname">Pink Dick</div>
+      <div class="prodinfo">
+        Эта майка настоящая легенда среди эпотажа. Может проверить вас на 
+        пошлость ну или на способность видесть скрытое.
+      </div>
+      <div class="prodsize">size: S/M/L </div>
+      <div class="prodprise">prise:100$</div>
+      <button class="getbtn">написать продавцу</button>
+    </div>
+    <div class="product">
+      <img src="./resources/products/майка5.png" alt="">
+      <div class="prodname">Pink Dick</div>
+      <div class="prodinfo">
+        Эта майка настоящая легенда среди эпотажа. Может проверить вас на 
+        пошлость ну или на способность видесть скрытое.
+      </div>
+      <div class="prodsize">size: S/M/L </div>
+      <div class="prodprise">prise:100$</div>
+      <button class="getbtn">написать продавцу</button>
+    </div>
+    <div class="product">
+      <img src="./resources/products/numetal1.png" alt="">
+      <div class="prodname">Nu Metal Vol.1</div>
+      <div class="prodinfo">
+        Эта майка настоящая легенда среди эпотажа. Может проверить вас на 
+        пошлость ну или на способность видесть скрытое.
+      </div>
+      <div class="prodsize">size: S/M/L </div>
+      <div class="prodprise">prise:100$</div>
+      <button class="getbtn">написать продавцу</button>
+    </div>
+    <div class="product">
+      <img src="./resources/products/numetal2.png" alt="">
+      <div class="prodname">Nu Metal Vol.2</div>
+      <div class="prodinfo">
+        Эта майка настоящая легенда среди эпотажа. Может проверить вас на 
+        пошлость ну или на способность видесть скрытое.
+      </div>
+      <div class="prodsize">size: S/M/L </div>
+      <div class="prodprise">prise:100$</div>
+      <button class="getbtn">написать продавцу</button>
+    </div>
+    <div class="product">
+      <img src="./resources/products/майка7.png" alt="">
+      <div class="prodname">little demon</div>
+      <div class="prodinfo">
+        Эта майка настоящая легенда среди эпотажа. Может проверить вас на 
+        пошлость ну или на способность видесть скрытое.
+      </div>
+      <div class="prodsize">size: S/M/L </div>
+      <div class="prodprise">prise:100$</div>
+      <button class="getbtn">написать продавцу</button>
+    </div>
+  </div>
+  <div class="Girls" id="Girls">
+    <div class="cap">Models</div>
+    
+    <div class="lot">
+      <div class="flower"></div>
+      <div class="slot1">
+        
+        <img src="https://inkppl.com/assets/php/files/092017/20688109_1742938256006840_2570023393868906496_n.jpg" alt="">
+        <div class="cover">
+          <div class="one">
+            <mow>VIVNCHIE</mow>
+          </div>
+          <div class="two">Two</div>
+          <div class="three">Three</div>
+          <div class="four">Four</div>
+          <div class="five">Five</div>
+          <div class="six"><pp>Angelica Anderson</pp></div>
+
+        </div>
+      </div>
+      <div class="slot2">
+        <h1> 
+          <pk>Фотограф</pk> : Мария <br>
+          <pk>Парикмахер</pk> : Геннадий<br>
+          <pk>Ногтекрас</pk> : Светлана <br>
+          <pk>ТатуМастер</pk> : Максим
+          
+          
+          _____________________ <br>
+          настроение: <v>dope</v>  <br>
+          любимая группа: <v>Sashk</v> <br>
+          духи: <v>Channel №666</v>  <br>
+          кофе: <v>черный</v>  <br>
+          любимый алкоголь: <v>виски</v>  <br>
+          тату: <v>ворон</v>  <br>
+          мечты: <v>Питер</v>  <br>
+          любимый цвет: <v>синий</v>  <br>
+          хочет на др: <v>koogo</v>  <br>
+          любимое животное: <v>слон</v>  <br>
+          краска: <v>Tonica</v>  <br>
+          косметика: <v>спермаконя</v>  <br>
+          белье: <v>виктория</v>  <br>
+          хобби: <v>серфинг</v>  <br>
+          хочет стать: <v>лингвист</v>  <br>
+
+
+        </h1>
+        
+      </div>
+      <div class="footer">footer / links / info / date / author / tags / specialthanx</div>
+
+    </div>
+    <div class="lot">
+      <div class="flower"></div>
+      <div class="slot1">
+        
+        <img src="https://i.redd.it/8safeof677xa1.jpg" alt="">
+        <div class="cover">
+          <div class="one">
+            <mow>VIVNCHIE</mow>
+          </div>
+          <div class="two">Two</div>
+          <div class="three">Three</div>
+          <div class="four">Four</div>
+          <div class="five">Five</div>
+          <div class="six"><pp>Brianna</pp></div>
+
+        </div>
+      </div>
+      <div class="slot2">
+        <h1> 
+          <pk>Фотограф</pk> : Мария <br>
+          <pk>Парикмахер</pk> : Геннадий<br>
+          <pk>Ногтекрас</pk> : Светлана <br>
+          <pk>ТатуМастер</pk> : Максим
+          
+          
+          _____________________ <br>
+          настроение: <v>dope</v>  <br>
+          любимая группа: <v>Sashk</v> <br>
+          духи: <v>Channel №666</v>  <br>
+          кофе: <v>черный</v>  <br>
+          любимый алкоголь: <v>виски</v>  <br>
+          тату: <v>ворон</v>  <br>
+          мечты: <v>Питер</v>  <br>
+          любимый цвет: <v>синий</v>  <br>
+          хочет на др: <v>koogo</v>  <br>
+          любимое животное: <v>слон</v>  <br>
+          краска: <v>Tonica</v>  <br>
+          косметика: <v>спермаконя</v>  <br>
+          белье: <v>виктория</v>  <br>
+          хобби: <v>серфинг</v>  <br>
+          хочет стать: <v>лингвист</v>  <br>
+
+
+        </h1>
+        
+      </div>
+      <div class="footer">footer / links / info / date / author / tags / specialthanx</div>
+
+    </div>
+    <div class="lot">
+      <div class="flower"></div>
+      <div class="slot1">
+        
+        <img src="https://i.pinimg.com/originals/71/d1/2b/71d12bd6dc4d25661e3203fdfa441878.png" alt="">
+        <div class="cover">
+          <div class="one">
+            <mow>VIVNCHIE</mow>
+          </div>
+          <div class="two">Two</div>
+          <div class="three">Three</div>
+          <div class="four">Four</div>
+          <div class="five">Five</div>
+          <div class="six"><pp>Brianna</pp></div>
+
+        </div>
+      </div>
+      <div class="slot2">
+        <h1> 
+          <pk>Фотограф</pk> : Мария <br>
+          <pk>Парикмахер</pk> : Геннадий<br>
+          <pk>Ногтекрас</pk> : Светлана <br>
+          <pk>ТатуМастер</pk> : Максим
+          
+          
+          _____________________ <br>
+          настроение: <v>dope</v>  <br>
+          любимая группа: <v>Sashk</v> <br>
+          духи: <v>Channel №666</v>  <br>
+          кофе: <v>черный</v>  <br>
+          любимый алкоголь: <v>виски</v>  <br>
+          тату: <v>ворон</v>  <br>
+          мечты: <v>Питер</v>  <br>
+          любимый цвет: <v>синий</v>  <br>
+          хочет на др: <v>koogo</v>  <br>
+          любимое животное: <v>слон</v>  <br>
+          краска: <v>Tonica</v>  <br>
+          косметика: <v>спермаконя</v>  <br>
+          белье: <v>виктория</v>  <br>
+          хобби: <v>серфинг</v>  <br>
+          хочет стать: <v>лингвист</v>  <br>
+
+
+        </h1>
+        
+      </div>
+      <div class="footer">footer / links / info / date / author / tags / specialthanx</div>
+
+    </div>
+    <div class="lot">
+      <div class="flower"></div>
+      <div class="slot1">
+        
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvqInLy5DOupPfICSdw4ulhGRCTa3z2S4SiQ&usqp=CAU" alt="">
+        <div class="cover">
+          <div class="one">
+            <mow>VIVNCHIE</mow>
+          </div>
+          <div class="two">Two</div>
+          <div class="three">Three</div>
+          <div class="four">Four</div>
+          <div class="five">Five</div>
+          <div class="six"><pp>Brianna Bannanna</pp></div>
+
+        </div>
+      </div>
+      <div class="slot2">
+        <h1> 
+          <pk>Фотограф</pk> : Мария <br>
+          <pk>Парикмахер</pk> : Геннадий<br>
+          <pk>Ногтекрас</pk> : Светлана <br>
+          <pk>ТатуМастер</pk> : Максим
+          
+          
+          _____________________ <br>
+          настроение: <v>dope</v>  <br>
+          любимая группа: <v>Sashk</v> <br>
+          духи: <v>Channel №666</v>  <br>
+          кофе: <v>черный</v>  <br>
+          любимый алкоголь: <v>виски</v>  <br>
+          тату: <v>ворон</v>  <br>
+          мечты: <v>Питер</v>  <br>
+          любимый цвет: <v>синий</v>  <br>
+          хочет на др: <v>koogo</v>  <br>
+          любимое животное: <v>слон</v>  <br>
+          краска: <v>Tonica</v>  <br>
+          косметика: <v>спермаконя</v>  <br>
+          белье: <v>виктория</v>  <br>
+          хобби: <v>серфинг</v>  <br>
+          хочет стать: <v>лингвист</v>  <br>
+
+
+        </h1>
+        
+      </div>
+      <div class="footer">footer / links / info / date / author / tags / specialthanx</div>
+
+    </div>
+    <div class="lot">
+      <div class="flower"></div>
+      <div class="slot1">
+        
+        <img src="https://64.media.tumblr.com/647e49f126636b3886748a644ac64f57/tumblr_ori92pSQK11ukxyw1o1_1280.pnj" alt="">
+        <div class="cover">
+          <div class="one">
+            <mow>VIVNCHIE</mow>
+          </div>
+          <div class="two">Two</div>
+          <div class="three">Three</div>
+          <div class="four">Four</div>
+          <div class="five">Five</div>
+          <div class="six"><pp>Brianna</pp></div>
+
+        </div>
+      </div>
+      <div class="slot2">
+        <h1> 
+          <pk>Фотограф</pk> : Мария <br>
+          <pk>Парикмахер</pk> : Геннадий<br>
+          <pk>Ногтекрас</pk> : Светлана <br>
+          <pk>ТатуМастер</pk> : Максим
+          
+          
+          _____________________ <br>
+          настроение: <v>dope</v>  <br>
+          любимая группа: <v>Sashk</v> <br>
+          духи: <v>Channel №666</v>  <br>
+          кофе: <v>черный</v>  <br>
+          любимый алкоголь: <v>виски</v>  <br>
+          тату: <v>ворон</v>  <br>
+          мечты: <v>Питер</v>  <br>
+          любимый цвет: <v>синий</v>  <br>
+          хочет на др: <v>koogo</v>  <br>
+          любимое животное: <v>слон</v>  <br>
+          краска: <v>Tonica</v>  <br>
+          косметика: <v>спермаконя</v>  <br>
+          белье: <v>виктория</v>  <br>
+          хобби: <v>серфинг</v>  <br>
+          хочет стать: <v>лингвист</v>  <br>
+
+
+        </h1>
+        
+      </div>
+      <div class="footer">footer / links / info / date / author / tags / specialthanx</div>
+
+    </div>
+    
+    
+  </div>
+  <div class="Articles">
+    <div class="article">
+      <h1>AVE-METAL</h1>
+      <img class="griff" src="./resources/griff.png" alt="">
+      <h2>Ню-метал использует элементы различных жанров, среди которых хип-хоп, альтернативный рок, фанк, гранж, электронная музыка, готик-рок, хардкор-панк, панк-рок, нью-вейв, джаз, постпанк, симфо-рок.[6][8][12][14][15][16] Также используются элементы различных поджанров метала, как, например, дэт-метал, рэп-метал, грув-метал, фанк-метал, трэш-метал, индастриал-метал.[6][8][12][17] К примеру, группы Static-X[18] и Dope[19] совмещают ню-метал с элементами индастриал-метала.
+
+        Ню-метал сильно синкопирован и базируется на гитарных риффах.[5] Переходы в середине песен и общее отсутствие гитарных соло контрастируют с другими жанрами хеви-метала.[5][20] Кори Гроу из журнала Revolver писал: «в его усилиях звучать ниже и упростить риффы, ню-метал вбивает кол в сердце гитарного соло».[21] Другое отличие от поджанров метала заключается в акценте на ритм, а не на сложность или настроение; ритм ню-метала часто схож с ритмом грув-метала.[8] Иногда применяется педаль wah-wah.[21] Гитарные риффы ню-метала порой похожи на риффы дэт-метала.[17] Басисты и барабанщики часто находятся под влиянием фанка и хип-хопа.[22][23] Бласт-биты, которые, как правило, присутствуют в блэк-метале и дэт-метале, для ню-метала не характерны.[24] К общим чертам ню-метала со многими поджанрами метала относятся применение тактового размера, дисторшна, пауэр-аккордов и ладовых систем, как, например, дорийского, эолийского и фригийского.[5]
+        
+        В ню-метале применяются семиструнные гитары,[25] чуть чаще, чем традиционные шестиструнные гитары,[12] которые, как правило, настраиваются ниже, чем обычно.[24][26] Как следствие, бас-гитары применяются пятиструнные или шестиструнные.[12][27] Техника игры на бас-гитаре очень часто близка к фанковому стилю.[25] Иногда в составе группы есть диджей, который отвечает за семплинг, скретчинг и звучание электронных инструментов.[12] Ню-метал тяготеет к груву и ритму хип-хопа.[20][17][25]
+        
+        В отличие от многих других поджанров метала, в ню-метале принимают участие музыканты женского пола. Например, Kittie — полностью женская группа;[28][29] по крайней мере одна участница есть в группах Coal Chamber[30] и Otep.[31]
+        
+        Вокальные стили включают в себя пение, рэп, скриминг и гроулинг.[20][17][24][32] Вокал в ню-метале часто ритмичный и находится под влиянием хип-хопа.[33] Лирика в песнях ню-метала часто сердитая или нигилистическая;[17] многое из лирики сосредотачивается на темах, таких как боль, тоска, запугивание, эмоциональная пытка, отказ, предательство и личное отчуждение, аналогично тематике гранжа.[12][15][20][25][32][34][35] Лирика ню-метала часто очень прямолинейна.[25] Однако есть песни, касающиеся других тем. Положительные тексты об обещании и надежде есть у группы P.O.D..[36] Ню-метал-песня[37] «Bodies» группы Drowning Pool о мошинге.[38] Уэйн Свинни из группы Saliva сказал, что их песня «Badass» «предназначена быть одним из „спортивных гимнов“».[39] Издание The Michigan Daily сообщает о лирике Limp Bizkit, что группа «применяла звучание ню-метала, как способ внедрения тестостерона в язвительный рэп белого парня. Как ни странно, зрители отнеслись к лидеру Фреду Дерсту серьезней, чем он хотел, будучи не в состоянии видеть намеренную глупость во многих его песнях».[25] Лирика Limp Bizkit также была описана как «женоненавистная».[40] Лирика группы Dope, как правило, о душевных переживаниях, сексе, наркотиках, женщинах, насилии и отношениях.[41] В отличие от других поджанров метала, ню-метал имеет тенденцию использовать ту же структуру куплетов, припевов и переходов, как и в поп-музыке.[17][24][42]
+        
+        Иногда в песнях ню-метал-групп принимают участие хип-хоп-исполнители. Песня «Children of the Korn» группы Korn была записана совместно с рэпером Ice Cube, который принимал участие в Family Values Tour 1998.[43][44] А песня «Play Me» группы Korn была записана совместно с Nas.[45] Limp Bizkit сделали записи со многими хип-хоп-исполнителями, включая Method Man,[46] Lil Wayne,[47] Xzibit,[48] Redman,[48] DMX[49] и Snoop Dogg.[50] Linkin Park сотрудничали с Jay Z на альбоме Collision Course (2004).[51] Kid Rock записывался с Eminem[52] и Snoop Dogg.[53] Тревор Бейкер из The Guardian писал: «группы, как Linkin Park, Korn и даже очень злословные Limp Bizkit… сделали намного больше для разрушения искусственных границ между „урбанистической музыкой“ и роком, чем любой из их более приемлемых двойников. Их концерты посетило огромное количество женщин, которое намного больше, чем у любой старой метал-группы».[54]
+        
+        К типичным атрибутам внешнего вида для ню-металлистов можно отнести: мешковатые штаны,[21][55][56][57] футболки и шорты,[20][58] джинсы фирмы JNCO,[59][60] спортивные костюмы фирмы Adidas,[60] спортивные джерси (футболки),[61] бейсболки,[62] мешковатые толстовки с капюшоном,[57] брюки карго, спортивные штаны, дреды,[63] цепи на джинсах,[20][61][64] торчащие волосы,[55][61] бороды,[56][63] татуировки,[20][58][64] лысины,[63][64] эспаньолки,[63] обесцвеченные или окрашенные волосы,[55][63] пирсинг[20][21][58][63] и особенно лицевой пирсинг.[57][64] Стиль одежды ню-металлистов можно сравнить с хип-хоп-модой.[21] Некоторые ню-метал-группы, как, например, Hollywood Undead,[65] Motograter,[66] Mushroomhead,[67] Mudvayne[68][69] и Slipknot,[64][70] носят маски, комбинезоны, костюмы, лицевую раскраску, корпспэйнт или роспись по телу.
+      </h2>
+    </div>
+  </div>
+
+  <div id="danceButton" class="button danceButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/6901/6901680.png" alt="">
+  </div>
+  <div id="stripButton" class="button stripButton">
+    <img src="https://icon-library.com/images/dance-icon/dance-icon-9.jpg" alt="">
+  </div>
+  <div id="spaceButton" class="button spaceButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/4193/4193678.png" alt="">
+  </div>
+  <div id="forwardButton" class="button forwardButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/32/32213.png" alt="">
+  </div>
+  <div id="backwardButton" class="button backwardButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/32/32213.png" alt="">
+  </div>
+  <div id="leftButton" class="button leftButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/32/32213.png" alt="">
+  </div>
+  <div id="rightButton" class="button rightButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/32/32213.png" alt="">
+  </div>
+
+  <div class="order">записаться на фотосессию</div>
+
+<!-- 
+  <div id="divObject" class="rectangle"> hello!
+      </div> -->
+  <!-- <div class="info">
+    <div class="block1">
+      <h1>Svetlicia</h1>
+      <h2>Гибкий и неординарный персонаж. <br>
+      Являясь помощником основного персонажа она обладает навыками лекаря, а так же самостоятельно может
+      совершать атаки против противников. <br>
+      Используя энергию истока способна превратить любой из четырех основных элементов как в исцеляющую, 
+      так и в разрушительную силу. <br>
+      Сила: 25; <br>
+      Ловкость: 30; <br>
+      Разум: 35; <br>
+      </h2>
+    </div>
+  </div> -->
+
+  <script src="./main.js" type="module">
+  </script>
+  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.umd.js"></script> -->
+
+<!-- <script type="importmap">
+  {
+    "imports": {
+      "three": "../build/three.module.js",
+      "three/addons/": "./jsm/"
+    }
+  }
+</script> -->
+<!-- <script>
+document.getElementById("passwordInput").addEventListener("input", function() {
+var passwordValue = document.getElementById("passwordInput").value;
+if (passwordValue === "сосимойхуй") {
+window.location.href = "./intim.html";
+}
+});
+</script> -->
+
+<!-- <script>
+  document.getElementById("submitButton").addEventListener("click", function(event) {
+event.preventDefault();
+
+var password = document.getElementById("passwordInput").value;
+
+// Здесь можно добавить проверку введенного пароля
+// Например, если пароль верный, делаем переход
+if (password === "ваш_кодовое_слово") {
+window.location.href = "другой_файл.html";
+} else {
+alert("Неверный пароль!");
+}
+});
+</script> -->
+<script>
+  function addClassToGirls() {
+    var girlsDiv = document.querySelector('.Girls'); // Обращение по имени класса '.Girls'
+    girlsDiv.classList.toggle('active');
+  }
+</script>
+<script>
+  function addClassToArticles() {
+    var articlesDiv = document.querySelector('.Articles'); // Обращение по имени класса '.Girls'
+    articlesDiv.classList.toggle('active');
+  }
+</script>
+<script>
+  function addClassToMarket() {
+    var marketDiv = document.querySelector('.Market'); // Обращение по имени класса '.Girls'
+    marketDiv.classList.toggle('active');
+  }
+</script>
+</body>
+</html>
+
+
+<!-- чисто идея. если выхотите стать чатсью вселенной пришлите фото -->

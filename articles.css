@@ -1,0 +1,31 @@
+.Articles
+{
+    position: absolute; z-index: 2;
+    width: 66.6%; height: 100%; top: 0; right: -69%; background-color: rgba(0, 0, 0, 0.631);
+    backdrop-filter: blur(10px); transition: 0.333s;
+    /* display: block;  */
+    /* display: none; */
+    overflow-y: scroll;
+}
+.Articles.active 
+{
+    right: 0%;
+    /* display: block; */
+}
+.Articles h1 
+{
+    margin: 60px;  font-size: 4vw; color: white;
+    text-shadow: 0 0 10px rgb(0, 217, 255),
+                0 0 15px rgb(0, 217, 255),
+                0 0 25px rgb(0, 217, 255);
+}
+.Articles h2 
+{
+    color: white; opacity: 1; font-size: 1.5vw; padding: 66px; padding-top: 0px;
+}
+.griff 
+{
+    width: 555px; float: right;
+    shape-outside: url(./resources/griff.png);
+    /* padding-left: -60px; */
+}
