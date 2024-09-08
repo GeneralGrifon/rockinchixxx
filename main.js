@@ -9,11 +9,6 @@ import { EffectComposer } from 'https://cdn.jsdelivr.net/npm/three@0.122/example
 import { RenderPass } from 'https://cdn.jsdelivr.net/npm/three@0.122/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'https://cdn.jsdelivr.net/npm/three@0.122/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-// import { CSS2DRenderer, CSS2DObject } from './build/CSS2DRenderer';
-
-
-
-
 class BasicCharacterControllerProxy {
   constructor(animations) {
     this._animations = animations;
@@ -46,9 +41,7 @@ class BasicCharacterController {
   _LoadModels() {
     const loader = new FBXLoader();
     loader.setPath('./resources/LILI/');
-    // loader.load('SH4A2.fbx', (fbx) => {
       loader.load('LILIFINAL.fbx', (fbx) => {
-      // stripanim
       fbx.scale.setScalar(0.1);
       fbx.traverse(c => {
         c.castShadow = true;
@@ -77,12 +70,7 @@ class BasicCharacterController {
 
       const loader = new FBXLoader(this._manager);
       loader.setPath('./resources/LILI/');
-      loader.load('walk.fbx', (a) => { _OnLoad('walk', a); });
-      loader.load('run.fbx', (a) => { _OnLoad('run', a); });
       loader.load('idle.fbx', (a) => { _OnLoad('idle', a); });
-      loader.load('dance.fbx', (a) => { _OnLoad('dance', a); });
-      loader.load('twerk.fbx', (a) => { _OnLoad('twerk', a); });
-      loader.load('strip.fbx', (a) => { _OnLoad('strip', a); });
     });
 
 
@@ -117,10 +105,6 @@ class BasicCharacterController {
       acc.multiplyScalar(2.0);
     }
 
-    // if (this._stateMachine._currentState.Name == 'dance') {
-    //   acc.multiplyScalar(0.0);
-    // }
-
     if (this._input._keys.forward) {
       velocity.z += acc.z * timeInSeconds;
     }
@@ -137,8 +121,7 @@ class BasicCharacterController {
       _Q.setFromAxisAngle(_A, 4.0 * -Math.PI * timeInSeconds * this._acceleration.y);
       _R.multiply(_Q);
     }
-
-    
+ 
 
     controlObject.quaternion.copy(_R);
 
@@ -188,7 +171,6 @@ class BasicCharacterControllerInput {
     document.addEventListener('keydown', (e) => this._onKeyDown(e), false);
     document.addEventListener('keyup', (e) => this._onKeyUp(e), false);
 
-    // Добавляем обработчики событий для кнопок мыши
 
     const stripButton = document.getElementById('stripButton');
     stripButton.addEventListener('mousedown', () => this._onMouseDown('strip'), false);
@@ -222,12 +204,10 @@ class BasicCharacterControllerInput {
   
   _onMouseDown(animation) {
     this._keys[animation] = true;
-    // this._parent.SetState(this._animations[animation].clip.name);
     }
     
     _onMouseUp(animation) {
     this._keys[animation] = false;
-    // Здесь можно добавить дополнительные действия, если необходимо
     }
   _onKeyDown(event) {
     switch (event.keyCode) {
@@ -331,11 +311,6 @@ class CharacterFSM extends FiniteStateMachine {
 
   _Init() {
     this._AddState('idle', IdleState);
-    this._AddState('walk', WalkState);
-    this._AddState('run', RunState);
-    this._AddState('dance', DanceState);
-    this._AddState('twerk', TwerkState);
-    this._AddState('strip', StripState);
   }
 };
 
@@ -347,250 +322,6 @@ class State {
   Enter() { }
   Exit() { }
   Update() { }
-};
-
-class TwerkState extends State {
-  constructor(parent) {
-    super(parent);
-
-    this._FinishedCallback = () => {
-      this._Finished();
-    }
-  }
-
-  get Name() {
-    return 'twerk';
-  }
-
-  Enter(prevState) {
-    const curAction = this._parent._proxy._animations['twerk'].action;
-    const mixer = curAction.getMixer();
-    mixer.addEventListener('finished', this._FinishedCallback);
-
-    if (prevState) {
-      const prevAction = this._parent._proxy._animations[prevState.Name].action;
-
-      curAction.reset();
-      curAction.setLoop(THREE.LoopOnce, 1);
-      curAction.clampWhenFinished = true;
-      curAction.crossFadeFrom(prevAction, 0.2, true);
-      curAction.play();
-    } else {
-      curAction.play();
-    }
-  }
-
-  _Finished() {
-    this._Cleanup();
-    this._parent.SetState('idle');
-  }
-
-  _Cleanup() {
-    const action = this._parent._proxy._animations['twerk'].action;
-
-    action.getMixer().removeEventListener('finished', this._CleanupCallback);
-  }
-
-  Exit() {
-    this._Cleanup();
-  }
-
-  Update(_) {
-  }
-};
-
-class StripState extends State {
-  constructor(parent) {
-    super(parent);
-
-    this._FinishedCallback = () => {
-      this._Finished();
-    }
-  }
-
-  get Name() {
-    return 'strip';
-  }
-
-  Enter(prevState) {
-    const curAction = this._parent._proxy._animations['strip'].action;
-    const mixer = curAction.getMixer();
-    mixer.addEventListener('finished', this._FinishedCallback);
-
-    if (prevState) {
-      const prevAction = this._parent._proxy._animations[prevState.Name].action;
-
-      curAction.reset();
-      curAction.setLoop(THREE.LoopOnce, 1);
-      curAction.clampWhenFinished = true;
-      curAction.crossFadeFrom(prevAction, 0.2, true);
-      curAction.play();
-    } else {
-      curAction.play();
-    }
-  }
-
-  _Finished() {
-    this._Cleanup();
-    this._parent.SetState('idle');
-  }
-
-  _Cleanup() {
-    const action = this._parent._proxy._animations['strip'].action;
-
-    action.getMixer().removeEventListener('finished', this._CleanupCallback);
-  }
-
-  Exit() {
-    this._Cleanup();
-  }
-
-  Update(_) {
-  }
-};
-
-class DanceState extends State {
-  constructor(parent) {
-    super(parent);
-
-    this._FinishedCallback = () => {
-      this._Finished();
-    }
-  }
-
-  get Name() {
-    return 'dance';
-  }
-
-  Enter(prevState) {
-    const curAction = this._parent._proxy._animations['dance'].action;
-    const mixer = curAction.getMixer();
-    mixer.addEventListener('finished', this._FinishedCallback);
-
-    if (prevState) {
-      const prevAction = this._parent._proxy._animations[prevState.Name].action;
-
-      curAction.reset();
-      curAction.setLoop(THREE.LoopOnce, 1);
-      curAction.clampWhenFinished = true;
-      curAction.crossFadeFrom(prevAction, 0.2, true);
-      curAction.play();
-    } else {
-      curAction.play();
-    }
-  }
-
-  _Finished() {
-    this._Cleanup();
-    this._parent.SetState('idle');
-  }
-
-  _Cleanup() {
-    const action = this._parent._proxy._animations['dance'].action;
-
-    action.getMixer().removeEventListener('finished', this._CleanupCallback);
-  }
-
-  Exit() {
-    this._Cleanup();
-  }
-
-  Update(_) {
-  }
-};
-
-class WalkState extends State {
-  constructor(parent) {
-    super(parent);
-  }
-
-  get Name() {
-    return 'walk';
-  }
-
-  Enter(prevState) {
-    const curAction = this._parent._proxy._animations['walk'].action;
-    if (prevState) {
-      const prevAction = this._parent._proxy._animations[prevState.Name].action;
-
-      curAction.enabled = true;
-
-      if (prevState.Name == 'run') {
-        const ratio = curAction.getClip().duration / prevAction.getClip().duration;
-        curAction.time = prevAction.time * ratio;
-      } else {
-        curAction.time = 0.0;
-        curAction.setEffectiveTimeScale(1.0);
-        curAction.setEffectiveWeight(1.0);
-      }
-
-      curAction.crossFadeFrom(prevAction, 0.5, true);
-      curAction.play();
-    } else {
-      curAction.play();
-    }
-  }
-
-  Exit() {
-  }
-
-  Update(timeElapsed, input) {
-    if (input._keys.forward || input._keys.backward) {
-      if (input._keys.shift) {
-        this._parent.SetState('run');
-      }
-      return;
-    }
-
-    this._parent.SetState('idle');
-  }
-};
-
-class RunState extends State {
-  constructor(parent) {
-    super(parent);
-  }
-
-  get Name() {
-    return 'run';
-  }
-
-  Enter(prevState) {
-    const curAction = this._parent._proxy._animations['run'].action;
-    if (prevState) {
-      const prevAction = this._parent._proxy._animations[prevState.Name].action;
-
-      curAction.enabled = true;
-
-      if (prevState.Name == 'walk') {
-        const ratio = curAction.getClip().duration / prevAction.getClip().duration;
-        curAction.time = prevAction.time * ratio;
-      } else {
-        curAction.time = 0.0;
-        curAction.setEffectiveTimeScale(1.0);
-        curAction.setEffectiveWeight(1.0);
-      }
-
-      curAction.crossFadeFrom(prevAction, 0.5, true);
-      curAction.play();
-    } else {
-      curAction.play();
-    }
-  }
-
-  Exit() {
-  }
-
-  Update(timeElapsed, input) {
-    if (input._keys.forward || input._keys.backward) {
-      if (!input._keys.shift) {
-        this._parent.SetState('walk');
-      }
-      return;
-    }
-
-    this._parent.SetState('idle');
-  }
 };
 
 class IdleState extends State {
@@ -633,7 +364,6 @@ class IdleState extends State {
   }
 };
 
-
 class CharacterControllerDemo {
   constructor() {
     this._Initialize();
@@ -641,10 +371,6 @@ class CharacterControllerDemo {
   }
 
   _Initialize() {
-
-    // Добавьте обработчик клика на кнопки div
-
-
 
 
     this._threejs = new THREE.WebGLRenderer({
@@ -706,80 +432,6 @@ class CharacterControllerDemo {
     this._scene.add( hemlight );
     this._cloudParticles = [];
 
-    // const loader2 = new THREE.TextureLoader();
-
-    // let cloud;
-    // let direction;
-
-    // loader2.load("smoke.png", (texture) => {
-    //   const cloudGeo = new THREE.PlaneBufferGeometry(77, 77);
-    //   const cloudMaterial = new THREE.MeshLambertMaterial({
-    //     map: texture,
-    //     transparent: true,
-    //     blendMode: THREE.AdditiveBlending
-    //   });
-
-    //   for (let p = 0; p < 150; p++) {
-    //     let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
-    //     cloud.position.set(
-    //       Math.random() * 800 - 800,
-    //       Math.random() * 30 - 50,
-    //       Math.random() * 800 - 800
-    //     );
-    //     cloud.rotation.x = 1.16;
-    //     cloud.rotation.y = -0.12;
-    //     cloud.rotation.z = Math.random() * 2 * Math.PI;
-    //     cloud.material.opacity = 0.45;
-    //     this._scene.add(cloud);
-    //     this._cloudParticles.push(cloud);
-
-    //     requestAnimationFrame((t) => {
-    //       this._Animate(t);
-    //     });
-
-    //   }
-    // });
-
-
-
-    // function onMouseClick(event) {
-    //   const mouse = new THREE.Vector2();
-    //   const raycaster = new THREE.Raycaster();
-
-    //   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    //   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    //   const targetPosition = this._target.position.clone();
-    //   const endingPosition = intersects[0].point; // Позиция облака
-    //   const startingPosition = targetPosition; // Позиция модели
-
-    //   const direction = endingPosition.clone().sub(startingPosition).normalize();
-    //   raycaster.set(targetPosition, direction);
-
-    //   const intersects = raycaster.intersectObject(cloud);
-
-    //   particleGeometry = new THREE.Geometry();
-    //   // ...
-    //   particleGeometry.vertices.push(startingPosition);
-
-    //   if (intersects.length > 0) {
-    //     // Выполните нужные действия с объектом, например, изменяйте его цвет или выполняйте другие операции
-    //   }
-
-    //   animate(startingPosition, endingPosition);
-    // }
-    // cloud.scale.x += 0.001; // Увеличение размера по оси x
-    // cloud.scale.y += 0.001; // Увеличение размера по оси y
-    // function animate(start, end) {
-
-    //   particles.geometry.vertices[0].add(direction); // Обновление позиции частицы
-    //   particles.geometry.verticesNeedUpdate = true;
-
-    //   requestAnimationFrame(animate);
-    // }
-
-    // document.addEventListener('click', onMouseClick.bind(this));
-
     const controls = new OrbitControls(
       this._camera, this._threejs.domElement);
     controls.target.set(0, 10, 0);
@@ -809,8 +461,7 @@ class CharacterControllerDemo {
       map: texture666,
       metalness: 0.8,
       roughness: 0.3,
-      // transparent: true, // Разрешаем прозрачность
-      opacity: 0.9 // Устанавливаем прозрачность материала
+      opacity: 0.9 
     });
 
     const ellipsoidGeometry = new THREE.SphereGeometry(25, 22, 33);
@@ -848,74 +499,25 @@ class CharacterControllerDemo {
     const cylinderGeometry = new THREE.CylinderGeometry(radius, radius, height, segments, 1, true);
     const materialC = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
     const cylinderMesh = new THREE.Mesh(cylinderGeometry, materialC);
-    cylinderMesh.position.set(0, 1.5, -10); // Расположение цилиндра вертикально
+    cylinderMesh.position.set(0, 1.5, -10); 
     this._scene.add(cylinderMesh);
 
-
-    // var Vgeometry = new THREE.PlaneGeometry(13, 12); // Пример геометрии куба
-    // var Vmaterial = new THREE.MeshBasicMaterial({ map: Vtexture }); // Пример материала с текстурой
-    // var Vmesh = new THREE.Mesh(Vgeometry, Vmaterial);
-    // Vmesh.rotation.y = -Math.PI / 5; // Поворот на 45 градусов (в радианах)
-    // Vmesh.position.set(13, 11, -10);
-    // this._scene.add(Vmesh);
-    // var video = document.createElement('video');
-    // video.src = '/game-main/resources/SvetaDisplay.mp4';
-    // video.autoplay = true; // Включение автоплея
-    // video.loop = true; // Включение автоплея
-    // video.load();
-
-    // var Vtexture = new THREE.VideoTexture(video);
-    // Vtexture.minFilter = THREE.LinearFilter;
-    // Vtexture.magFilter = THREE.LinearFilter;
-
-    // Vmaterial.map = Vtexture;
     const button2 = document.getElementById("articlespos");
     button2.addEventListener("click", function () {
-      // Изменение позиции камеры
       this._camera.position.set(10, 22, 50);
-      // this._camera.rotation.y += -Math.PI / 8;
-      // this._camera.position.z -= 1;
-    }.bind(this)); // Обратите внимание на использование bind(this) для сохранения контекста для использования this._camera
+    }.bind(this)); 
+    
 
 
     const button = document.getElementById("marketpos");
     button.addEventListener("click", function () {
-      // Изменение позиции камеры
       this._camera.position.set(-40, 23, 50);
-      // this._camera.rotation.y += Math.PI / 8;
-      // this._camera.position.z -= 1;
     }.bind(this));
 
     const button4 = document.getElementById("homepos");
     button4.addEventListener("click", function () {
-      // Изменение позиции камеры
       this._camera.position.set(- 20, 13, 50);
-      // this._camera.rotation.y += Math.PI / 8;
-      // this._camera.position.z -= 1;
     }.bind(this));
-     // Обратите внимание на использование bind(this) для сохранения контекста для использования this._camera
-    
-    
-    
-
-
-    
-    // const renderer = new CSS2DRenderer();
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild(renderer.domElement);
-    
-    // const divObject = new CSS2DObject(document.getElementById('divObject'));
-    // scene.add(divObject);
-
-    // const ringC = new THREE.RingGeometry(25, 24, 77);
-    // const materialCC = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-    // const ringyC = new THREE.Mesh(ringC, materialCC);
-    // this._scene.add(ringyC);
-    // ringyC.position.set(0, 2.5, -10);
-    // ringyC.rotateX(Math.PI / 2);
-
-    
-    
 
     this._mixers = [];
     this._previousRAF = null;
@@ -923,9 +525,6 @@ class CharacterControllerDemo {
     this._LoadAnimatedModel();
     this._RAF();
   }
-  // cloudParticles() {
-  //   this._scene.add(cloud);
-  // }
 
   _LoadAnimatedModel() {
     const params = {
@@ -957,32 +556,18 @@ class CharacterControllerDemo {
     });
   }
 
-  // _LoadModel() {
-  //   const loader = new GLTFLoader();
-  //   loader.load('./resources/zombie/mremireh_o_desbiens.fbx', (gltf) => {
-  //     gltf.scene.traverse(c => {
-  //       c.castShadow = true;
-  //     });
-  //     this._scene.add(gltf.scene);
-  //   });
-  // }
-
   _OnWindowResize() {
     this._camera.aspect = window.innerWidth / window.innerHeight;
     this._camera.updateProjectionMatrix();
     this._threejs.setSize(window.innerWidth, window.innerHeight);
   }
   _Animate(t) {
-    // Ваш код анимации облаков, например, вращения
     this._cloudParticles.forEach(p => {
       p.rotation.z -= 0.00001;
     });
 
-    // Добавьте здесь другие действия анимации, если необходимо
-
-    // Вызываем requestAnimationFrame для продолжения анимации
     requestAnimationFrame((t) => {
-      this._Animate(t); // Передаем cloudParticles в следующий кадр анимации
+      this._Animate(t); 
     });
   }
 
@@ -997,7 +582,7 @@ class CharacterControllerDemo {
       this._composer.render();
 
       this._Animate(t);
-      // this._threejs.render(this._scene, this._camera);
+
       this._Step(t - this._previousRAF);
       this._previousRAF = t;
     });
@@ -1014,8 +599,6 @@ class CharacterControllerDemo {
     }
   }
 }
-
-
 
 let _APP = null;
 
