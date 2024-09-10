@@ -54,7 +54,10 @@
 }
 .prodprise 
 {
-    position: relative; width: 100%; background-color: rgb(165, 149, 103); font-size: 2vw; color: aliceblue;
+    position: relative; width: 100%; 
+    background: linear-gradient(0deg, rgb(184, 168, 119), rgb(165, 149, 103), rgb(146, 131, 86) );
+    /* background-color: rgb(165, 149, 103);  */
+    font-size: 2vw; color: aliceblue;
     text-align: center;
 }
 .getbtn
