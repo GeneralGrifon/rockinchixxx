@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="articles.css">
   <link rel="stylesheet" href="models.css">
   <link rel="stylesheet" href="market.css">
-  
+  <link rel="stylesheet" href="partners.css">
 </head>
 
 <style>
@@ -62,11 +62,22 @@ font-size: 20px; height: 25px; width: 44%;
   <!-- <button>
     intim
   </button> -->
+  
   <div class="Components">
     
-    <div class="cmpt Artcls" onclick="addClassToArticles()" >articles</div>
-    <div class="cmpt Mdls" id="modelspos" onclick="addClassToGirls()">models</div>
-    <div class="cmpt Mrct" onclick="addClassToMarket()" >market</div>
+    <div class="cmpt Artcls" 
+    onclick="toggleDiv('Articles')"
+    >articles</div>
+    <div class="cmpt Mdls" id="modelspos" 
+    onclick="toggleDiv('Girls')"
+    >models</div>
+    <div class="cmpt Mrct" 
+    onclick="toggleDiv('Market')"
+    >market</div>
+    <div class="cmpt Prtns" 
+    onclick="toggleDiv('Partners')"
+    >partners</div>
+
     <!-- <div class="uneverse cmpt ">uverse</div> -->
     
   </div>
@@ -85,7 +96,7 @@ font-size: 20px; height: 25px; width: 44%;
       </div>
       <div class="prodsize">size: S/M/L </div>
       <div class="prodprise">prise:100$</div>
-      <button class="getbtn">написать продавцу</button>
+      <button class="getbtn">сделать заказ</button>
     </div>
     <div class="product">
       <img src="./resources/products/майка5.png" alt="">
@@ -96,7 +107,7 @@ font-size: 20px; height: 25px; width: 44%;
       </div>
       <div class="prodsize">size: S/M/L </div>
       <div class="prodprise">prise:100$</div>
-      <button class="getbtn">написать продавцу</button>
+      <button class="getbtn">сделать заказ</button>
     </div>
     <div class="product">
       <img src="./resources/products/numetal1.png" alt="">
@@ -107,7 +118,7 @@ font-size: 20px; height: 25px; width: 44%;
       </div>
       <div class="prodsize">size: S/M/L </div>
       <div class="prodprise">prise:100$</div>
-      <button class="getbtn">написать продавцу</button>
+      <button class="getbtn">сделать заказ</button>
     </div>
     <div class="product">
       <img src="./resources/products/numetal2.png" alt="">
@@ -118,7 +129,7 @@ font-size: 20px; height: 25px; width: 44%;
       </div>
       <div class="prodsize">size: S/M/L </div>
       <div class="prodprise">prise:100$</div>
-      <button class="getbtn">написать продавцу</button>
+      <button class="getbtn">сделать заказ</button>
     </div>
     <div class="product">
       <img src="./resources/products/майка7.png" alt="">
@@ -129,7 +140,7 @@ font-size: 20px; height: 25px; width: 44%;
       </div>
       <div class="prodsize">size: S/M/L </div>
       <div class="prodprise">prise:100$</div>
-      <button class="getbtn">написать продавцу</button>
+      <button class="getbtn">сделать заказ</button>
     </div>
   </div>
   <div class="Girls" id="Girls">
@@ -355,7 +366,6 @@ font-size: 20px; height: 25px; width: 44%;
           <pk>Ногтекрас</pk> : Светлана <br>
           <pk>ТатуМастер</pk> : Максим
           
-          
           _____________________ <br>
           настроение: <v>dope</v>  <br>
           любимая группа: <v>Sashk</v> <br>
@@ -385,7 +395,7 @@ font-size: 20px; height: 25px; width: 44%;
   </div>
   <div class="Articles">
     <div class="article">
-      <h1>AVE-METAL</h1>
+      <h1>Ave Nu Metal</h1>
       <img class="griff" src="./resources/griff.png" alt="">
       <h2>Ню-метал использует элементы различных жанров, среди которых хип-хоп, альтернативный рок, фанк, гранж, электронная музыка, готик-рок, хардкор-панк, панк-рок, нью-вейв, джаз, постпанк, симфо-рок.[6][8][12][14][15][16] Также используются элементы различных поджанров метала, как, например, дэт-метал, рэп-метал, грув-метал, фанк-метал, трэш-метал, индастриал-метал.[6][8][12][17] К примеру, группы Static-X[18] и Dope[19] совмещают ню-метал с элементами индастриал-метала.
 
@@ -403,6 +413,15 @@ font-size: 20px; height: 25px; width: 44%;
       </h2>
     </div>
   </div>
+  <div class="Partners">
+    <h1>Partners</h1>
+    <h2>kdhksdhjfglksjdfhgljkshfdg
+      lksdfjg;ksjd;fgk;sdkfjg;skdjfg;kdhksdhjfglksjdfhgljkshfdg
+      lksjdfg;jksdfgkj;slkfdjg;lskdfjg;lskdfjgjlkj
+      sdfkgj;lsdkfjg;lskdfjg;ksdjf
+    </h2>
+  </div>
+  
 
   <div id="danceButton" class="button danceButton">
     <img src="https://cdn-icons-png.flaticon.com/512/6901/6901680.png" alt="">
@@ -428,81 +447,23 @@ font-size: 20px; height: 25px; width: 44%;
 
   <div class="order">записаться на фотосессию</div>
 
-<!-- 
-  <div id="divObject" class="rectangle"> hello!
-      </div> -->
-  <!-- <div class="info">
-    <div class="block1">
-      <h1>Svetlicia</h1>
-      <h2>Гибкий и неординарный персонаж. <br>
-      Являясь помощником основного персонажа она обладает навыками лекаря, а так же самостоятельно может
-      совершать атаки против противников. <br>
-      Используя энергию истока способна превратить любой из четырех основных элементов как в исцеляющую, 
-      так и в разрушительную силу. <br>
-      Сила: 25; <br>
-      Ловкость: 30; <br>
-      Разум: 35; <br>
-      </h2>
-    </div>
-  </div> -->
-
-  <script src="./main.js" type="module">
+  <script src="./mainn.js" type="module">
   </script>
-  
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.umd.js"></script> -->
+ 
+ <script>
+  function toggleDiv(divClass) {
 
-<!-- <script type="importmap">
-  {
-    "imports": {
-      "three": "../build/three.module.js",
-      "three/addons/": "./jsm/"
-    }
-  }
-</script> -->
-<!-- <script>
-document.getElementById("passwordInput").addEventListener("input", function() {
-var passwordValue = document.getElementById("passwordInput").value;
-if (passwordValue === "сосимойхуй") {
-window.location.href = "./intim.html";
-}
-});
-</script> -->
+      const allDivs = document.querySelectorAll('.Girls, .Articles, .Market, .Partners');
 
-<!-- <script>
-  document.getElementById("submitButton").addEventListener("click", function(event) {
-event.preventDefault();
-
-var password = document.getElementById("passwordInput").value;
-
-// Здесь можно добавить проверку введенного пароля
-// Например, если пароль верный, делаем переход
-if (password === "ваш_кодовое_слово") {
-window.location.href = "другой_файл.html";
-} else {
-alert("Неверный пароль!");
-}
-});
-</script> -->
-<script>
-  function addClassToGirls() {
-    var girlsDiv = document.querySelector('.Girls'); // Обращение по имени класса '.Girls'
-    girlsDiv.classList.toggle('active');
+      allDivs.forEach(div => {
+          if (div.classList.contains(divClass)) {
+              div.classList.toggle('active'); 
+          } else {
+              div.classList.remove('active'); 
+          }
+      });
   }
 </script>
-<script>
-  function addClassToArticles() {
-    var articlesDiv = document.querySelector('.Articles'); // Обращение по имени класса '.Girls'
-    articlesDiv.classList.toggle('active');
-  }
-</script>
-<script>
-  function addClassToMarket() {
-    var marketDiv = document.querySelector('.Market'); // Обращение по имени класса '.Girls'
-    marketDiv.classList.toggle('active');
-  }
-</script>
+
 </body>
 </html>
-
-
-<!-- чисто идея. если выхотите стать чатсью вселенной пришлите фото -->
