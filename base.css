@@ -61,6 +61,18 @@ body {
 {
   background-color: #c170fed0; color: rgb(255, 255, 255);
 }
+@media only screen and (max-width: 800px)  {  
+  .cmpt 
+{
+  width: 65%; height: 44px; 
+  font-size: 5vw; padding: 10px; z-index: 1; cursor: pointer;
+}
+
+.cmpt:hover
+{
+  background-color: #c170fed0; color: rgb(255, 255, 255);
+}
+}
 .controls 
 {
   position: absolute;
@@ -83,7 +95,7 @@ body {
   width: 50px; height: 50px;  margin: 5px; cursor: pointer;
   backdrop-filter: blur(10px);
   display: flex; justify-content: center; align-items: center;
-  display: none;
+  /* display: none; */
 }
 .button:hover 
 {
@@ -190,12 +202,9 @@ body {
 .order 
 {
   position: absolute; width: auto; height: auto; 
-  /* background: linear-gradient(to bottom, #e0c789 30%, white 35%, #a38a4b); */
-  /* background: #e0c789; */
-  /* clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 70%, 95% 100%, 5% 100%, 0% 70%, 0% 30%); */
   display: flex; justify-content: center; align-items: center; font-size: 2vw; color: white;
   padding: 10px; top: 9%; right: 0; margin: 1%; 
-  margin-right: 11%;
+  margin-right: 11%; cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
   animation: flick2 2s linear infinite;
 }
