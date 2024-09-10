@@ -49,7 +49,7 @@ class BasicCharacterController {
 
       this._target = fbx;
       this._params.scene.add(this._target);
-      this._target.position.set(-13, 0, -10);
+      this._target.position.set(-15, 0, 0);
 
       this._mixer = new THREE.AnimationMixer(this._target);
 
@@ -364,42 +364,49 @@ class IdleState extends State {
   }
 };
 
-class CharacterControllerDemo {
+class Scene {
   constructor() {
     this._Initialize();
-
   }
 
   _Initialize() {
 
-
     this._threejs = new THREE.WebGLRenderer({
       antialias: true,
-    });
-    this._threejs.outputEncoding = THREE.sRGBEncoding;
-    this._threejs.shadowMap.enabled = true;
-    this._threejs.shadowMap.type = THREE.PCFSoftShadowMap;
-    this._threejs.setPixelRatio(window.devicePixelRatio);
-    this._threejs.setSize(window.innerWidth, window.innerHeight);
+  });
+  this._threejs.outputEncoding = THREE.sRGBEncoding;
+  this._threejs.shadowMap.enabled = true;
+  this._threejs.shadowMap.type = THREE.PCFSoftShadowMap;
+  this._threejs.setPixelRatio(window.devicePixelRatio);
 
-    document.body.appendChild(this._threejs.domElement);
+  // Инициализируем размеры рендерера
+  this._threejs.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(this._threejs.domElement);
 
-    window.addEventListener('resize', () => {
-      this._OnWindowResize();
-    }, false);
+  // Создаем сцену
+  this._scene = new THREE.Scene();
 
-    const fov = 30;
-    const aspect = 1000 / 500;
+    // Создаем камеру
+    const fov = 50;
+    const aspect = window.innerWidth / window.innerHeight;  // используем текущее соотношение
     const near = 1.0;
-    const far = 1000.0;
+    const far = 100.0;
     this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    this._camera.position.set(- 20, 13, 50);
+    this._camera.position.set(-35, 13, 20);
 
-    this._scene = new THREE.Scene();
+        // Создаем композер эффектов
+        this._composer = new EffectComposer(this._threejs);
+        this._composer.addPass(new RenderPass(this._scene, this._camera));
+    // this._composer.addPass(new UnrealBloomPass({ x: 1024, y: 1024 }, 0.3, 0.1, 0.55));
+            // Вызываем _OnWindowResize() после инициализации камеры
+    this._OnWindowResize();
 
-    this._composer = new EffectComposer(this._threejs);
-    this._composer.addPass(new RenderPass(this._scene, this._camera));
-    this._composer.addPass(new UnrealBloomPass({ x: 1024, y: 1024 }, 0.3, 0.1, 0.55));
+        // Добавляем обработчик изменения размера окна
+        window.addEventListener('resize', () => {
+          this._OnWindowResize();
+      }, false);
+
+
 
     let light = new THREE.DirectionalLight(0x008cff, 0.04);
     light.position.set(1152, 1500, 2500);
@@ -417,17 +424,16 @@ class CharacterControllerDemo {
     light.shadow.camera.top = 50;
     light.shadow.camera.bottom = -50;
     this._scene.add(light);
-    let lightHelper = new THREE.DirectionalLightHelper(light, 5);
-    this._scene.add(lightHelper);
+    // let lightHelper = new THREE.DirectionalLightHelper(light, 5);
+    // this._scene.add(lightHelper);
 
     let light2 = new THREE.DirectionalLight(0xff4400, 0.04);
     light2.position.set(40, 30, -100);
     this._scene.add(light2);
-    let light2Helper = new THREE.DirectionalLightHelper(light2, 5);
-    this._scene.add(light2Helper);
-
-    let amblight = new THREE.AmbientLight(0xFFFFFF, 0.1);
-    this._scene.add(amblight);
+    // let light2Helper = new THREE.DirectionalLightHelper(light2, 5);
+    // this._scene.add(light2Helper);
+    // let amblight = new THREE.AmbientLight(0xFFFFFF, 0.1);
+    // this._scene.add(amblight);
     let hemlight = new THREE.HemisphereLight( 0xffffbb, 1 );
     this._scene.add( hemlight );
     this._cloudParticles = [];
@@ -472,13 +478,12 @@ class CharacterControllerDemo {
     const ellipsoidMesh = new THREE.Mesh(ellipsoidGeometry, material);
     this._scene.add(ellipsoidMesh);
     ellipsoidMesh.position.set(0, 0, -10);
-   
 
-    const ring = new THREE.RingGeometry(13, 12, 222);
-    const material3 = new THREE.MeshBasicMaterial({ color: 0xe777ff, side: THREE.DoubleSide });
-    const ringy = new THREE.Mesh(ring, material3);
-    this._scene.add(ringy);
-    ringy.position.set(0, 10, -33);
+    // const ring = new THREE.RingGeometry(13, 12, 222);
+    // const material3 = new THREE.MeshBasicMaterial({ color: 0xe777ff, side: THREE.DoubleSide });
+    // const ringy = new THREE.Mesh(ring, material3);
+    // this._scene.add(ringy);
+    // ringy.position.set(0, 10, -33);
 
     const ring2 = new THREE.RingGeometry(18, 17, 222);
     const material4 = new THREE.MeshBasicMaterial({ color: 0xff45f6, side: THREE.DoubleSide });
@@ -506,8 +511,6 @@ class CharacterControllerDemo {
     button2.addEventListener("click", function () {
       this._camera.position.set(10, 22, 50);
     }.bind(this)); 
-    
-
 
     const button = document.getElementById("marketpos");
     button.addEventListener("click", function () {
@@ -560,6 +563,15 @@ class CharacterControllerDemo {
     this._camera.aspect = window.innerWidth / window.innerHeight;
     this._camera.updateProjectionMatrix();
     this._threejs.setSize(window.innerWidth, window.innerHeight);
+
+    // Устанавливаем положение камеры в зависимости от ширины экрана
+    if (window.innerWidth <= 800) {
+      // Пример изменения позиции камеры для маленьких экранов
+      this._camera.position.set(-55, 15, 15); // Установите желаемое новое положение
+  } else {
+      // Возвращаем камеру на исходные позиции для больших экранов
+      this._camera.position.set(-35, 13, 20); // Исходное положение
+  }
   }
   _Animate(t) {
     this._cloudParticles.forEach(p => {
@@ -603,5 +615,5 @@ class CharacterControllerDemo {
 let _APP = null;
 
 window.addEventListener('DOMContentLoaded', () => {
-  _APP = new CharacterControllerDemo();
+  _APP = new Scene();
 });
