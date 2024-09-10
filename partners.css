@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'gotic';
+    src: url(/rockinchixxx-main/resources/fonts/CloisterBlack.ttf);
+}
+
+.Partners  
+{
+    position: absolute; z-index: 2;
+    width: 66.6%; height: 100%; top: 0; right: -69%; background-color: rgba(0, 0, 0, 0.631);
+    backdrop-filter: blur(10px); transition: 0.333s;
+    /* display: block;  */
+    /* display: none; */
+    overflow-y: scroll;
+}
+.Partners.active 
+
+{
+    right: 0%;
+    /* display: block; */
+}
+.Partners  h1 
+{
+    font-family: 'gotic';
+    margin: 60px;  font-size: 5vw; color: white;
+    text-shadow: 0 0 10px rgb(195, 0, 255),
+                0 0 15px rgb(195, 0, 255),
+                0 0 25px rgb(195, 0, 255);
+}
+
+.Partners  h2 
+{
+    color: white; opacity: 1; font-size: 1.3vw; font-weight: 100;
+    padding: 66px; padding-top: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.griff 
+{
+    width: 555px; float: right;
+    shape-outside: url(./resources/griff.png);
+    /* padding-left: -60px; */
+}
