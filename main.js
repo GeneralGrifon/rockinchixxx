@@ -41,7 +41,7 @@ class BasicCharacterController {
   _LoadModels() {
     const loader = new FBXLoader();
     loader.setPath('./resources/LILI/');
-      loader.load('LILIFINAL.fbx', (fbx) => {
+      loader.load('LILOTIMAZED.fbx', (fbx) => {
       fbx.scale.setScalar(0.1);
       fbx.traverse(c => {
         c.castShadow = true;
@@ -405,8 +405,6 @@ class Scene {
         window.addEventListener('resize', () => {
           this._OnWindowResize();
       }, false);
-
-
 
     let light = new THREE.DirectionalLight(0x008cff, 0.04);
     light.position.set(1152, 1500, 2500);
