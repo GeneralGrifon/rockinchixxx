@@ -41,7 +41,7 @@ class BasicCharacterController {
   _LoadModels() {
     const loader = new FBXLoader();
     loader.setPath('./resources/LILI/');
-      loader.load('LILOTIMAZED.fbx', (fbx) => {
+      loader.load('LILOPAC.fbx', (fbx) => {
       fbx.scale.setScalar(0.1);
       fbx.traverse(c => {
         c.castShadow = true;
