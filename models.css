@@ -8,6 +8,7 @@
     overflow-x: hidden;
     /* display: none; */
 }
+
 .Girls.active
 {
     right: 0%;
@@ -201,6 +202,156 @@ v {color: rgb(255, 255, 255);
     background-image: url(./resources/узор.png);
     background-size: 100%;
     filter: invert(1); mix-blend-mode: screen;
+  }
+
+   @media (max-width: 800px) 
+   {
+     .Girls
+     {
+         width: 80%; right: -100%;
+     }
+     .lot 
+   {
+       position: relative; width: 100%; 
+       height: 70%; 
+       margin: 5px; 
+       display: grid; 
+       grid-template-columns: 50% 50%;
+       grid-template-rows: 70% 10%;
+       overflow: hidden;
    }
+   .slot1 
+  {
+    position: relative; overflow: hidden;
+    /* background-color: rgb(0, 88, 252); */
+  }
+  .slot1 img 
+  {
+    position: relative;
+    width: 90%; padding: 10px;
+  }
+  .slot2
+  {
+    width: 100%; height: auto; right: 0;  overflow: hidden;
+    background: linear-gradient(0.5turn,rgba(255, 255, 255, 0.183) 0%,rgba(255, 255, 255, 0) 40%,rgba(6, 6, 6, 0.721) 41%,rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.142) 100%);
+  }
+  .slot2 h1 
+  {
+    padding-top: 0; margin: 0;
+    font-size: 2.6vw; color: rgb(255, 255, 255); padding: 15px; padding-left: 25px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 100;
+    font-weight: lighter;
+  }
+  pk {  
+  color: rgb(224, 209, 134);  font-weight: 500;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.644);
+  line-height: 0.9em;} 
+  v {color: rgb(255, 255, 255); 
+  text-shadow: 0 0 5px rgb(0, 221, 255); 
+  }
+  .cover 
+  {
+    position: absolute; width: 90%; height: 100%; background-color: rgba(0, 0, 0, 0); top: 0; left: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(100px, auto); overflow: hidden;
+  }
 
+  .one {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    background: rgba(255, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.468);
+    outline: 1px solid white;
+        }
+  .one mow
+  {
+    position: absolute;
+    margin: 0; padding: 0;
+    color: rgba(230, 212, 110, 0.738); font-size: 6vw; 
+    transform: rotateZ(-90deg);
+    top: 230px; left: -160px;
+    display: inline-block; /* чтобы поворот применялся к элементу блока */
+    text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.722);
+    animation: down 7s linear infinite;
+  }
+  .two {
+    display: none;
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+    outline: 1px solid white;
+    font-size: 2vw; color: white; padding: 20px;
+    mix-blend-mode: color-dodge;
+  }
+  .three {
+    display: none;
+    grid-column: 1;
+    grid-row: 4 / 5;
+    mix-blend-mode: color-dodge; 
+    outline: 1px solid white;
+    font-size: 2vw; color: white; padding: 20px;
+  }
+  .four {
+    display: none;
+    grid-column: 2 / 4;
+    grid-row: 2 / 4; 
+    outline: 1px solid white;
+    font-size: 2vw; color: white; padding: 20px;
+  }
+  .five {
+    display: none;
+    grid-column: 2;
+    grid-row: 4;
+    outline: 1px solid white;
+    font-size: 2vw; color: white; padding: 20px;
+    mix-blend-mode: color-dodge;
+  }
+  .six {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    background: linear-gradient(black, rgba(0, 0, 0, 0.322));
+    border-top: 1px solid white; 
+    /* background: rgba(106, 255, 0, 0.049); */
+    font-size: 2.5vw;
+    /* display: flex; */
+    /* text-align: end; */
+    text-align: right;
+    padding: 5px;
 
+  }
+  .six pp 
+  {
+    font-family: 'LED';
+    font-size: 4vw;
+    width: auto;
+    color: white;
+    padding-top: 5px;
+    /* padding-right: 20px;  */
+    animation: flick 2s linear infinite;
+    
+  }
+  .flower 
+  {
+    position: absolute; width: 200px; height: 155px; background-color: yellowgreen; 
+    rotate: 10deg;
+    opacity: 0.5;
+    bottom: -13px; right: -10px;
+    background-image: url(./resources/узор.png);
+    background-size: 100%;
+    filter: invert(1); mix-blend-mode: screen;
+  }
+  .one mow
+  {
+    position: absolute;
+    margin: 0; padding: 0;
+    color: rgba(230, 212, 110, 0.738); font-size: 8.5vw; 
+    background-color: black;
+    left: -53px;
+    display: inline-block; 
+    text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.722);
+    mix-blend-mode: screen;
+  }
+
+   }
